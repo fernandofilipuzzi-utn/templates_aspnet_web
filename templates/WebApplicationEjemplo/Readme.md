@@ -7,3 +7,5 @@ dotnet dev-certs https --clean
 dotnet dev-certs https --trust
 
 certmgr.msc
+
+https://www.youtube.com/watch?v=orLOuvaToco&list=PLur-8VoYbGX7z2iL_8ZifnkKkIJqDmbg8&index=65
