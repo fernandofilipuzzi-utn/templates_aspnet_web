@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Transactions;
 using WebApplicationEjemplo.Models;
+using WebApplicationEjemplo.Services;
 
 namespace WebApplicationEjemplo.ApiControllers;
 
@@ -8,58 +10,51 @@ namespace WebApplicationEjemplo.ApiControllers;
 public class AlumnosController : ControllerBase
 {
     // Mock 
-    private static readonly List<Alumno> Alumnos = new()
-    {
-        new Alumno { Id = 1, Nombre = "Ana", Nota = 100 },
-        new Alumno { Id = 2, Nombre = "Ema", Nota = 80 },
-        new Alumno { Id = 3, Nombre = "Samuel", Nota = 50 }
-    };
+    AlumnosService service = new AlumnosService(); 
 
     // GET: api/alumnos
     [HttpGet]
     public IActionResult GetAlumnos()
     {
-        return Ok(Alumnos);
+        return Ok(service.GetAll());
     }
 
     // GET: api/alumnos/{id}
     [HttpGet("{id}")]
     public IActionResult GetAlumnoById(int id)
     {
-        var product = Alumnos.FirstOrDefault(p => p.Id == id);
-        if (product == null)
+        Alumno alumno=new Alumno();
+        if (alumno == null)
         {
-            return NotFound(new { Message = "Product not found" });
+            return NotFound(new { Message = "Alumno no encontrado" });
         }
-        return Ok(product);
+        return Ok(alumno);
     }
 
     // POST: api/alumnos
     [HttpPost]
-    public IActionResult CreateAlumno([FromBody] Alumno newProduct)
+    public IActionResult CreateAlumno([FromBody] Alumno nuevoAlumno)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        newProduct.Id = Alumnos.Count + 1;
-        Alumnos.Add(newProduct);
-        return CreatedAtAction(nameof(GetAlumnoById), new { id = newProduct.Id }, newProduct);
+        Alumno nuevo=service.Create(nuevoAlumno);
+
+        //investigar el 201=createAtAction
+        return CreatedAtAction("CreateAlumno", new { id = nuevoAlumno.Id }, nuevoAlumno);
     }
 
     // PUT: api/alumnos/{id}
     [HttpPut("{id}")]
-    public IActionResult UpdateAlumno(int id, [FromBody] Alumno updatedAlumno)
+    public IActionResult UpdateAlumno([FromBody] Alumno actualizarAlumno)
     {
-        var product = Alumnos.FirstOrDefault(p => p.Id == id);
-        if (product == null)
+        if (service.Update(actualizarAlumno) == false)
         {
-            return NotFound(new { Message = "Product not found" });
+            return NotFound(new { Message = "Alumno no encontrado" });
         }
 
-        product.Nombre = updatedAlumno.Nombre;
-        product.Nota = updatedAlumno.Nota;
         return NoContent();
     }
 
@@ -67,13 +62,10 @@ public class AlumnosController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteAlumno(int id)
     {
-        var product = Alumnos.FirstOrDefault(p => p.Id == id);
-        if (product == null)
+        if (service.Delete(id) == false)
         {
-            return NotFound(new { Message = "Alumno not found" });
+            return NotFound(new { Message = "Alumno no encontrado" });
         }
-
-        Alumnos.Remove(product);
-        return NoContent();
+        return NoContent();//204
     }
 }
