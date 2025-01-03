@@ -1,0 +1,29 @@
+﻿@model WebApplicationEjemplo.Models.Alumno
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar</h1>
+
+<form asp-asp-controller="Productos" asp-action="Editar">
+
+    <div class="mb-3">
+        <label for="id" class="form-label">Id</label>
+        <input type="text" class="form-control" id="id" name="id" placeholder="Id" value="@Model?.Id" />
+    </div>
+
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del alumno" value="@Model?.Nombre" />
+    </div>
+
+    <div class="mb-3">
+        <label for="nota" class="form-label">Nota</label>
+        <input type="text" class="form-control" id="nota" name="nota" placeholder="Nota del alumno" value="@Model?.Nota" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirmar cambios</button>
+
+</form>
