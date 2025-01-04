@@ -23,7 +23,7 @@ public class AlumnosController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetAlumnoById(int id)
     {
-        Alumno alumno=new Alumno();
+        Alumno alumno=service.GetById(id);
         if (alumno == null)
         {
             return NotFound(new { Message = "Alumno no encontrado" });
@@ -46,16 +46,16 @@ public class AlumnosController : ControllerBase
         return CreatedAtAction("CreateAlumno", new { id = nuevoAlumno.Id }, nuevoAlumno);
     }
 
-    // PUT: api/alumnos/{id}
-    [HttpPut("{id}")]
-    public IActionResult UpdateAlumno([FromBody] Alumno actualizarAlumno)
+    // PUT: api/alumnos/
+    [HttpPut()]
+    public IActionResult PutUpdateAlumno([FromBody] Alumno actualizarAlumno)
     {
         if (service.Update(actualizarAlumno) == false)
         {
             return NotFound(new { Message = "Alumno no encontrado" });
         }
 
-        return NoContent();
+        return Ok(actualizarAlumno);
     }
 
     // DELETE: api/productos/{id}

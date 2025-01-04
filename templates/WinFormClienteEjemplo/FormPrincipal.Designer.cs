@@ -41,15 +41,17 @@
             Id = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Nota = new DataGridViewTextBoxColumn();
+            btnSeleccionar = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAlumnos).BeginInit();
             SuspendLayout();
             // 
             // btnCrear
             // 
-            btnCrear.Location = new Point(531, 50);
+            btnCrear.Location = new Point(531, 172);
             btnCrear.Margin = new Padding(4);
             btnCrear.Name = "btnCrear";
-            btnCrear.Size = new Size(96, 60);
+            btnCrear.Size = new Size(114, 60);
             btnCrear.TabIndex = 0;
             btnCrear.Text = "Crear Nuevo";
             btnCrear.UseVisualStyleBackColor = true;
@@ -57,10 +59,10 @@
             // 
             // btnListar
             // 
-            btnListar.Location = new Point(531, 172);
+            btnListar.Location = new Point(531, 247);
             btnListar.Margin = new Padding(4);
             btnListar.Name = "btnListar";
-            btnListar.Size = new Size(96, 55);
+            btnListar.Size = new Size(114, 55);
             btnListar.TabIndex = 1;
             btnListar.Text = "Listar";
             btnListar.UseVisualStyleBackColor = true;
@@ -68,13 +70,14 @@
             // 
             // btnBorrar
             // 
-            btnBorrar.Location = new Point(531, 235);
+            btnBorrar.Location = new Point(531, 89);
             btnBorrar.Margin = new Padding(4);
             btnBorrar.Name = "btnBorrar";
-            btnBorrar.Size = new Size(96, 55);
+            btnBorrar.Size = new Size(114, 55);
             btnBorrar.TabIndex = 2;
             btnBorrar.Text = "Borrar";
             btnBorrar.UseVisualStyleBackColor = true;
+            btnBorrar.Click += btnBorrar_Click;
             // 
             // tbId
             // 
@@ -130,7 +133,9 @@
             dgvAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAlumnos.Columns.AddRange(new DataGridViewColumn[] { Id, Nombre, Nota });
             dgvAlumnos.Location = new Point(12, 172);
+            dgvAlumnos.MultiSelect = false;
             dgvAlumnos.Name = "dgvAlumnos";
+            dgvAlumnos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAlumnos.Size = new Size(499, 193);
             dgvAlumnos.TabIndex = 9;
             // 
@@ -149,11 +154,35 @@
             Nota.HeaderText = "Nota";
             Nota.Name = "Nota";
             // 
+            // btnSeleccionar
+            // 
+            btnSeleccionar.Location = new Point(531, 310);
+            btnSeleccionar.Margin = new Padding(4);
+            btnSeleccionar.Name = "btnSeleccionar";
+            btnSeleccionar.Size = new Size(114, 55);
+            btnSeleccionar.TabIndex = 10;
+            btnSeleccionar.Text = "Editar";
+            btnSeleccionar.UseVisualStyleBackColor = true;
+            btnSeleccionar.Click += btnSeleccionar_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(531, 21);
+            button1.Margin = new Padding(4);
+            button1.Name = "button1";
+            button1.Size = new Size(114, 60);
+            button1.TabIndex = 11;
+            button1.Text = "Confirmar registro";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 379);
+            ClientSize = new Size(665, 379);
+            Controls.Add(button1);
+            Controls.Add(btnSeleccionar);
             Controls.Add(dgvAlumnos);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -185,9 +214,11 @@
         private Label lbId;
         private Label label2;
         private Label label3;
-        private DataGridView dgvAlumnos;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Nota;
+        private Button btnSeleccionar;
+        protected internal DataGridView dgvAlumnos;
+        private Button button1;
     }
 }

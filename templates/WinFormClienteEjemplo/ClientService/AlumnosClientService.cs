@@ -20,7 +20,7 @@ namespace WinFormClienteEjemplo.ClientService
 
             using var client = new HttpClient();
 
-            var response = await client.GetAsync(url);
+            var response = await client.GetAsync(endpoint);
 
             if (response.IsSuccessStatusCode)
             {
@@ -35,7 +35,28 @@ namespace WinFormClienteEjemplo.ClientService
             return alumnos;
         }
 
-        public async Task<Alumno> Create(Alumno nuevo)
+        async public Task<Alumno> GetById(int id)
+        {
+            Alumno alumno = null;
+
+            string endpoint = $"{url}/{id}";
+
+            using var client = new HttpClient();
+
+            var response = await client.GetAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                //ejemplo de cadena esperada
+                var mensaje = await response.Content.ReadAsStringAsync();
+
+                alumno = JsonSerializer.Deserialize<Alumno>(mensaje);
+            }
+
+            return alumno;
+        }
+
+        async public Task<Alumno> Create(Alumno nuevo)
         {
             Alumno creado = null;
 
@@ -47,7 +68,7 @@ namespace WinFormClienteEjemplo.ClientService
             var json= JsonSerializer.Serialize(nuevo);
             var content = new StringContent( json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(url,content);
+            var response = await client.PostAsync(endpoint, content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -56,6 +77,43 @@ namespace WinFormClienteEjemplo.ClientService
             }
 
             return creado;
+        }
+
+        async public Task<Alumno> Actualizar(Alumno nuevo)
+        {
+            Alumno actualizado = null;
+
+            string endpoint = $"{url}/";
+
+            using var client = new HttpClient();
+
+            var json = JsonSerializer.Serialize(nuevo);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync(endpoint, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var mensaje = await response.Content.ReadAsStringAsync();
+                actualizado = JsonSerializer.Deserialize<Alumno>(mensaje);
+            }
+
+            return actualizado;
+        }
+
+        async public Task Eliminar(int id)
+        {
+            string endpoint = $"{url}/{id}";
+
+            using var client = new HttpClient();
+
+            var response = await client.DeleteAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
+            {
+                
+            }
+
         }
     }
 }
