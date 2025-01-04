@@ -10,7 +10,7 @@ namespace WebApplicationEjemplo.Services
             new Alumno { Id = 2, Nombre = "Ema", Nota = 80 },
             new Alumno { Id = 3, Nombre = "Samuel", Nota = 50 }
         };
-        static int GEN = 1;
+        static int GEN = Alumnos.Count;
 
         public List<Alumno> GetAll()
         { 
@@ -25,7 +25,7 @@ namespace WebApplicationEjemplo.Services
 
         public Alumno Create(Alumno nuevo)
         {
-            nuevo.Id = GEN + 1;
+            nuevo.Id = GEN++;
             Alumnos.Add(nuevo);
             return nuevo;
         }
@@ -49,7 +49,6 @@ namespace WebApplicationEjemplo.Services
 
             if (product == null) return false;
            
-
             Alumnos.Remove(product);
             return true;
         }

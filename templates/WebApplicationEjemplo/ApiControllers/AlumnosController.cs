@@ -33,7 +33,7 @@ public class AlumnosController : ControllerBase
 
     // POST: api/alumnos
     [HttpPost]
-    public IActionResult CreateAlumno([FromBody] Alumno nuevoAlumno)
+    public IActionResult PostCreateAlumno([FromBody] Alumno nuevoAlumno)
     {
         if (!ModelState.IsValid)
         {
