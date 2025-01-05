@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationEjemplo", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication_Area", "WebApplication_Area\WebApplication_Area.csproj", "{C747E823-ED38-4D9A-9EF4-5009F4916DE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormClienteEjemplo", "WinFormClienteEjemplo\WinFormClienteEjemplo.csproj", "{D18BC773-370D-4CCC-ADCA-317409814CB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormClienteEjemplo", "WinFormClienteEjemplo\WinFormClienteEjemplo.csproj", "{D18BC773-370D-4CCC-ADCA-317409814CB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{75A68714-BE40-4776-B79A-6ADDF8196E6A}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\script.sql = SQL\script.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

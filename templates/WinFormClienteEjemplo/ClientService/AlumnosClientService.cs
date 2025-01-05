@@ -95,25 +95,31 @@ namespace WinFormClienteEjemplo.ClientService
             if (response.IsSuccessStatusCode)
             {
                 var mensaje = await response.Content.ReadAsStringAsync();
-                actualizado = JsonSerializer.Deserialize<Alumno>(mensaje);
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                actualizado = JsonSerializer.Deserialize<Alumno>(mensaje, options);
             }
 
             return actualizado;
         }
 
-        async public Task Eliminar(int id)
+        async public Task<bool> Eliminar(int id)
         {
             string endpoint = $"{url}/{id}";
 
             using var client = new HttpClient();
 
             var response = await client.DeleteAsync(endpoint);
-
+                       
             if (response.IsSuccessStatusCode)
             {
-                
+                return true;    
             }
-
+            return false;
         }
     }
 }

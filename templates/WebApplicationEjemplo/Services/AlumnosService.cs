@@ -1,56 +1,43 @@
-﻿using WebApplicationEjemplo.Models;
+﻿using WebApplicationEjemplo.DALs;
+using WebApplicationEjemplo.Models;
 
 namespace WebApplicationEjemplo.Services
 {
     public class AlumnosService
     {
-        private static readonly List<Alumno> Alumnos = new()
+        //Server=nombre_del_servidor;Database=nombre_de_la_base_de_datos;User Id=usuario;Password=contraseña;
+        string connectionString = @"Data Source=TSP;Initial Catalog=bd_Alumnos;Integrated Security=True;TrustServerCertificate=True";
+        IAlumnoDao alumnoDao;
+
+
+        public AlumnosService()
         {
-            new Alumno { Id = 1, Nombre = "Ana", Nota = 100 },
-            new Alumno { Id = 2, Nombre = "Ema", Nota = 80 },
-            new Alumno { Id = 3, Nombre = "Samuel", Nota = 50 }
-        };
-        static int GEN = Alumnos.Count;
+            alumnoDao = new AlumnoSQLServerDao(connectionString);
+        }
 
         public List<Alumno> GetAll()
         { 
-            return Alumnos.OrderBy(a => a.Id).ToList();
+            return alumnoDao.GetAll();
         }
 
         public Alumno GetById(int id)
         {
-            var alumno = Alumnos.FirstOrDefault(p => p.Id == id);
-            return alumno;
+            return alumnoDao.GetById(id);
         }
 
         public Alumno Create(Alumno nuevo)
         {
-            nuevo.Id = GEN++;
-            Alumnos.Add(nuevo);
-            return nuevo;
+            return alumnoDao.Add(nuevo);
         }
 
         public bool Update(Alumno aActualizar)
         {
-            var alumno = Alumnos.FirstOrDefault(p => p.Id == aActualizar.Id);
-
-            if (alumno == null)
-                return false;
-
-            alumno.Nombre = aActualizar.Nombre;
-            alumno.Nota = aActualizar.Nota;
-
-            return true;
+            return alumnoDao.Update(aActualizar);
         }
 
         public bool Delete(int id)
         {
-            var product = Alumnos.FirstOrDefault(p => p.Id == id);
-
-            if (product == null) return false;
-           
-            Alumnos.Remove(product);
-            return true;
+            return alumnoDao.Delete(id);
         }
     }
 }
