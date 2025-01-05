@@ -4,11 +4,11 @@ using WebApplicationEjemplo.Models;
 
 namespace WebApplicationEjemplo.DALs;
 
-public class AlumnoSQLServerDao : IAlumnoDao
+public class AlumnoSQLServerDAL : IAlumnoDAL
 {
     private readonly string _connectionString;
 
-    public AlumnoSQLServerDao(string connectionString)
+    public AlumnoSQLServerDAL(string connectionString)
     {
         _connectionString = connectionString;
     }

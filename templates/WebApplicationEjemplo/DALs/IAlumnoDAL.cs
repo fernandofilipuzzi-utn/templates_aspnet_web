@@ -2,7 +2,7 @@
 
 namespace WebApplicationEjemplo.DALs;
 
-public interface IAlumnoDao
+public interface IAlumnoDAL
 {
     List<Alumno> GetAll();
     Alumno GetById(int id);

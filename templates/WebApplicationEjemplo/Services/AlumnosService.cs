@@ -7,12 +7,12 @@ namespace WebApplicationEjemplo.Services
     {
         //Server=nombre_del_servidor;Database=nombre_de_la_base_de_datos;User Id=usuario;Password=contraseña;
         string connectionString = @"Data Source=TSP;Initial Catalog=bd_Alumnos;Integrated Security=True;TrustServerCertificate=True";
-        IAlumnoDao alumnoDao;
+        IAlumnoDAL alumnoDao;
 
 
         public AlumnosService()
         {
-            alumnoDao = new AlumnoSQLServerDao(connectionString);
+            alumnoDao = new AlumnoSQLServerDAL(connectionString);
         }
 
         public List<Alumno> GetAll()

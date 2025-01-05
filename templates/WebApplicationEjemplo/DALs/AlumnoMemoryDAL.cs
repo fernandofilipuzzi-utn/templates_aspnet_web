@@ -4,7 +4,7 @@ using WebApplicationEjemplo.Models;
 
 namespace WebApplicationEjemplo.DALs;
 
-public class AlumnoMemoryDao : IAlumnoDao
+public class AlumnoMemoryDAL : IAlumnoDAL
 {
     private static readonly List<Alumno> Alumnos = new()
         {
@@ -14,7 +14,7 @@ public class AlumnoMemoryDao : IAlumnoDao
         };
     static int GEN = Alumnos.Count;
 
-    public AlumnoMemoryDao()
+    public AlumnoMemoryDAL()
     {
     }
 
